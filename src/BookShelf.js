@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import Book from './Book.js'
 class BookShelf extends Component {
-
-  generateBooks(books) {
+  generateBooks (books) {
     return books.map((book) => {
+      let author = ''
+      if (book.authors !== undefined) {
+        console.log(author)
+        author = book.authors.join(', ')
+      }
       return (
         <li key={book.id} >
           <Book
             name={book.title}
-            author={book.authors.join(', ')}
+            author={author}
             image={book.imageLinks.thumbnail}
           />
         </li>
@@ -16,13 +20,14 @@ class BookShelf extends Component {
     })
   }
 
-  render() {
+  render () {
     let renderedBooks = this.generateBooks(this.props.books)
+    let title = (this.props.name !== undefined) ? <h2 className='bookshelf-title'>{this.props.name}</h2> : null
     return (
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">{this.props.name}</h2>
-        <div className="bookshelf-books">
-          <ol className="books-grid">
+      <div className='bookshelf'>
+        {title}
+        <div className='bookshelf-books'>
+          <ol className='books-grid'>
             {renderedBooks}
           </ol>
         </div>
@@ -31,4 +36,4 @@ class BookShelf extends Component {
   }
 }
 
-export default BookShelf;
+export default BookShelf
