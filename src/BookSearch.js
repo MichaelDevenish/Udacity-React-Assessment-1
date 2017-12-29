@@ -52,3 +52,4 @@ class BookSearch extends Component {
   }
 }
 export default BookSearch
+//join with current books if they exist to get shelf status

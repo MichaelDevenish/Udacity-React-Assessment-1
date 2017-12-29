@@ -3,18 +3,9 @@ import Book from './Book.js'
 class BookShelf extends Component {
   generateBooks (books) {
     return books.map((book) => {
-      let author = ''
-      if (book.authors !== undefined) {
-        console.log(author)
-        author = book.authors.join(', ')
-      }
       return (
         <li key={book.id} >
-          <Book
-            name={book.title}
-            author={author}
-            image={book.imageLinks.thumbnail}
-          />
+          <Book details={book} />
         </li>
       )
     })

@@ -18,7 +18,18 @@ class BooksApp extends React.Component {
 
   onBookSearch (query) {
     BooksAPI.search(query).then(books => {
-      this.setState({ SearchBooks: books })
+      BooksAPI.getAll().then(currentBooks => {
+        let outputData = []
+        books.forEach(element => {
+          var possibleStatus = currentBooks.filter(book => book.id === element.id);
+          if(possibleStatus.length !== 0){
+            element.shelf = possibleStatus[0].shelf
+          }
+          outputData.push(element)
+        });
+        console.log(outputData)
+        this.setState({ SearchBooks: outputData })
+      })
     })
   }
 
