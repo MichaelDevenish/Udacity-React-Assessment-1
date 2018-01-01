@@ -1,6 +1,23 @@
 import React, { Component } from 'react'
 
 class Book extends Component {
+  
+  constructor (props) {
+    super(props)
+    let selectedVar = 'none'
+    if (this.props.details.shelf !== undefined){
+      selectedVar = this.props.details.shelf
+    }
+
+    this.state = {
+      selected: selectedVar
+    }
+  }
+
+  changeShelf (event) { 
+    this.setState({ selected: event.target.value })
+    this.props.onShelfChange(event.target.value, this.props.details)
+  }
   render () {
     let author = ''
     if (this.props.details.authors !== undefined) {
@@ -10,13 +27,15 @@ class Book extends Component {
     if (this.props.details.imageLinks !== undefined) {
       image = this.props.details.imageLinks.thumbnail
     }
-
+  
     return (
       <div className='book'>
         <div className='book-top'>
           <div className='book-cover' style={{ width: 128, height: 192, backgroundImage: `url(${image})` }} />
           <div className='book-shelf-changer'>
-            {this.generateSelect()}
+            <select value={this.state.selected} onChange={this.changeShelf.bind(this)}>
+              {this.generateSelect()}
+            </select>
           </div>
         </div>
         <div className='book-title'>{this.props.details.title}</div>
@@ -25,48 +44,25 @@ class Book extends Component {
     )
   }
   generateSelect () {
-    switch (this.props.details.shelf) {
-      case 'currentlyReading':
+    let options = [<option value='none' disabled>Move to...</option>]
+    options = options.concat(this.props.shelves.map((shelf) => {
+      if (shelf[0] === this.props.details.shelf) {
         return (
-          <select>
-            <option value='none' disabled>Move to...</option>
-            <option value='currentlyReading' selected>✔ Currently Reading</option>
-            <option value='wantToRead'>Want to Read</option>
-            <option value='read'>Read</option>
-            <option value='none'>None</option>
-          </select>
+          <option
+            value={shelf[0]}
+            key={shelf[0]}>✔ {shelf[1]}</option>
         )
-      case 'wantToRead':
+      } else {
         return (
-          <select>
-            <option value='none' disabled>Move to...</option>
-            <option value='currentlyReading'>Currently Reading</option>
-            <option value='wantToRead' selected>✔ Want to Read</option>
-            <option value='read'>Read</option>
-            <option value='none'>None</option>
-          </select>
+          <option
+            value={shelf[0]}
+            key={shelf[0]}
+          >{shelf[1]}</option>
         )
-      case 'read':
-        return (
-          <select>
-            <option value='none' disabled>Move to...</option>
-            <option value='currentlyReading'>Currently Reading</option>
-            <option value='wantToRead'>Want to Read</option>
-            <option value='read' selected>✔ Read</option>
-            <option value='none'>None</option>
-          </select>
-        )
-      default:
-        return (
-          <select>
-            <option value='none' disabled>Move to...</option>
-            <option value='currentlyReading'>Currently Reading</option>
-            <option value='wantToRead'>Want to Read</option>
-            <option value='read'>Read</option>
-            <option value='none' selected>✔ None</option>
-          </select>
-        )
-    }
+      }
+    }))
+    options.push(<option value='none'>None</option>)
+    return options
   }
 }
 

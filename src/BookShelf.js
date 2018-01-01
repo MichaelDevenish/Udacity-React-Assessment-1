@@ -5,7 +5,11 @@ class BookShelf extends Component {
     return books.map((book) => {
       return (
         <li key={book.id} >
-          <Book details={book} />
+          <Book
+            details={book}
+            shelves={this.props.shelves}
+            onShelfChange={this.props.onShelfChange}
+          />
         </li>
       )
     })

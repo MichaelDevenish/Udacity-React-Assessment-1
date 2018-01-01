@@ -6,9 +6,7 @@ class ListBooks extends Component {
 
   render () {
     let sortedBooks = this.sortBooks(this.props.books)
-    let showingShelves = this.showShelves(sortedBooks);
-
-    console.log(sortedBooks)
+    let showingShelves = this.showShelves(sortedBooks)
     return (
       <div className='list-books'>
         <div className='list-books-title'>
@@ -57,6 +55,8 @@ class ListBooks extends Component {
           key='currentlyReading'
           name='Currently Reading'
           books={sortedBooks.currentlyReading}
+          shelves={this.props.shelves}
+          onShelfChange={this.props.onShelfChange}
       />)
     }
     if (sortedBooks.wantToRead.length !== 0) {
@@ -64,6 +64,8 @@ class ListBooks extends Component {
         <BookShelf key='wantToRead'
           name='Want to Read'
           books={sortedBooks.wantToRead}
+          shelves={this.props.shelves}
+          onShelfChange={this.props.onShelfChange}
       />)
     }
     if (sortedBooks.read.length !== 0) {
@@ -72,6 +74,8 @@ class ListBooks extends Component {
           key='read'
           name='Read'
           books={sortedBooks.read}
+          shelves={this.props.shelves}
+          onShelfChange={this.props.onShelfChange}
         />)
     }
     return showingShelves
