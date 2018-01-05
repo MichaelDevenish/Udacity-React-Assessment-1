@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import Book from './Book.js'
 class BookShelf extends Component {
+  /**
+   * @description generates a list of Books from the supplied details
+   * @param {*} books a list of books with details
+   * @returns {Book[]} an array of Book objects
+   */
   generateBooks (books) {
     return books.map((book) => {
       return (
@@ -14,7 +19,9 @@ class BookShelf extends Component {
       )
     })
   }
-
+  /**
+   * @returns the item to be rendered
+   */
   render () {
     let renderedBooks = this.generateBooks(this.props.books)
     let title = (this.props.name !== undefined) ? <h2 className='bookshelf-title'>{this.props.name}</h2> : null
