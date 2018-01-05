@@ -21,7 +21,6 @@ class BooksApp extends React.Component {
       ]
     }
   }
-
   /**
    * @description moves the requested book to the requested shelf
    * @param {string} shelf the shelf that is being moved to
@@ -42,7 +41,6 @@ class BooksApp extends React.Component {
       this.setState({Books: updatedBooks});
     }
   }
-
   /**
    * @description once component mounts get the books from the API
    */
@@ -51,7 +49,6 @@ class BooksApp extends React.Component {
       this.setState({ Books: books });
     });
   }
-
   /**
    * @description gets the books relating to the query string
    * @param {string} query the query string to be searched for
@@ -73,7 +70,6 @@ class BooksApp extends React.Component {
       }
     });
   }
-
   /**
    * @returns the item to be rendered
    */

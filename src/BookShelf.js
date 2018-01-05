@@ -17,7 +17,7 @@ class BookShelf extends Component {
           />
         </li>
       )
-    })
+    });
   }
   /**
    * @returns the item to be rendered
@@ -34,8 +34,8 @@ class BookShelf extends Component {
           </ol>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default BookShelf
+export default BookShelf;

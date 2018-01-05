@@ -59,4 +59,5 @@ class BookSearch extends Component {
     );
   }
 }
-export default BookSearch
+
+export default BookSearch;
